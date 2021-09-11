@@ -1,15 +1,15 @@
 import React from "react";
 
-import { Container, Header, Main, Footer, Cards } from "components";
+import { AppContainer, MovieContainer, MovieCard, SearchBar } from "components";
+import { MovieProdiver } from "context";
 
 const Home: React.FC = () => {
   return (
-    <Container>
-      <Header />
-      <Main />
-      <Cards />
-      <Footer />
-    </Container>
+    <AppContainer>
+      <MovieProdiver>
+        <MovieContainer />
+      </MovieProdiver>
+    </AppContainer>
   );
 };
 
