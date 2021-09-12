@@ -23,7 +23,7 @@ export const MovieDetailCard: React.FC = () => {
                     </div>
                 </div>
                 <div className="w-full lg:w-2/5">
-                    <img src={movieDetail.Poster} className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block" />
+                    <img src={movieDetail.Poster} className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block" alt="Movie's poster"/>
                 </div>
                 <div className="absolute top-20 h-12 w-18 p-4">
                     <Link to="/">
