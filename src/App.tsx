@@ -1,17 +1,20 @@
 import "styles/global.scss";
 import { Provider } from "react-redux";
-import store from "redux/store";
 import "./i18n";
 
 import Home from "pages";
+import { BrowserRouter, Switch, useHistory } from "react-router-dom";
 
 function App(): JSX.Element {
+  
+  let history = useHistory();
+
   return (
-    <Provider store={store}>
+    <BrowserRouter>
       <div className="App">
         <Home />
       </div>
-    </Provider>
+    </BrowserRouter>
   );
 }
 

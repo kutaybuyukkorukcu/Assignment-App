@@ -72,3 +72,8 @@ export interface MovieSearchResponse {
     Search: SimpleMovieDetail[];
     totalResults: string | number;
 }
+
+export enum SearchType {
+    BASIC_SEARCH,
+    EXTENDED_SEARCH
+}

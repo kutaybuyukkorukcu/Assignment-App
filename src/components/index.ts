@@ -1,2 +1,2 @@
 export { Button, Cards } from "./common";
-export { Footer, MovieContainer, SearchBar, MovieCard, AppContainer } from "./layout";
+export { Footer, MovieContainer, SearchBar, MovieCard, AppContainer, MovieList } from "./layout";
