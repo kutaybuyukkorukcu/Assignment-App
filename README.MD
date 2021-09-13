@@ -1,6 +1,5 @@
 # Assignment-App
 
-
 This project was generated with [superplate](https://github.com/pankod/superplate).
 
 ## Getting Started
@@ -9,10 +8,10 @@ superplate is a Next.js all-in-one project generator. Create your project with t
 
 ## Available Scripts
 
-### Running the development server.
+### Running the development server. Craco Start
 
 ```bash
-    npm run dev
+    npm run start
 ```
 
 ### Building for production.
@@ -21,87 +20,115 @@ superplate is a Next.js all-in-one project generator. Create your project with t
     npm run build
 ```
 
-### Running the production server.
+### Running the dev server. Craco start
 
 ```bash
     npm run start
 ```
+### Bonus Items
 
-## Learn More
+• Api returns 10 item in one call. Find a way to show 20 item in per page. **DONE**\
+• Use client side caching for reduce your api calls and explain it how to achieve this. **DONE** (Context api)\
 
-To learn more about **superplate**, please check out the [Documentation](https://github.com/pankod/superplate).
+With the use of context api the user does not have to reselect the search type or retype the search parameter.\
 
+Although the user switches between the pages, when the user goes to the page where the movies are listed, the user will see that the previous selections will remain the same.\
 
-### **TailwindCSS**
+I could not include the pageNumber state into the context api due to time limitation. If I did, my expectation would be that the pagination would not reset after the person went to the movie detail page and came.\
 
-A utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup.
+• Unit Tests **DONE** (Didnt have enough time for them. Tried to implement for some components and did but was out of time to corret them)\
+• Reusable components **DONE**\
 
-[Go To Documentation](https://tailwindcss.com/docs)
+### Additional Libraries
 
+TailwindCSS, React Context API, Jest, Testing Library, Axios, Craco
 
-### **SASS/SCSS**
+## Application Parts
 
-Sass is a stylesheet language that’s compiled to CSS. It allows you to use variables, nested rules, mixins, functions, and more, all with a fully CSS-compatible syntax.
+#### Services (https://github.com/kutaybuyukkorukcu/Assignment-App/blob/main/src/services/movie.service.ts)
 
-[Go To Documentation](https://sass-lang.com/documentation)
+- getMoviesBySearchParam(searchParam: string, page: number = 1)\
+// Returns 10 movie data depending on the search parameter
+- getMovieDetailByImdbId(movieImdbId: string)\
+// Returns all the details of a given movie
+- getAdditionalMoviesBySearchParam(searchParam: string, page: number = 1)\
+// Returns 20 movie data depending on the search parameter
 
+#### Types
 
-### **React Redux**
+- SimpleMovieDetail\
+// omdb search response movie data list
+- MovieSearchResponse\
+Response: string | boolean;
+Search: SimpleMovieDetail[];
+totalResults: string | number;
+// omdb search response entity
+- MovieDetail\
+// omdb get movie detail by imdb id
+- SearchType\
+// BASIC_SEARCH implies listed movie data length per page is 3 and the used service is getMoviesBySearchParam
+// EXTENDED_SEARCH implies listed movie data length per page is 20 and the used service is getAdditionalMoviesBySearchParam
 
-Redux helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test.
+#### Pages
 
-[Go To Documentation](https://redux.js.org/introduction/getting-started)
+- Movie Page\
+// MovieContainer and MovieDetailCard with react-router implemented
 
+#### Components
 
-### **RTK Query**
+- MovieContainer (https://github.com/kutaybuyukkorukcu/Assignment-App/blob/main/src/components/layout/container/MovieContainer/index.tsx)\
 
-RTK Query is a powerful data fetching and caching tool
+MovieContainer includes SearchBar, MovieList and ReactPaginate components 
 
-[Go To Documentation](https://redux-toolkit.js.org/rtk-query/overview)
+- SearchBar (https://github.com/kutaybuyukkorukcu/Assignment-App/blob/main/src/components/layout/main/SearchBar/index.tsx)\
 
+uses searchParam, setSearchParam, searchType, setSearchType from context.\
+Doesnt make api call as soon as input changes, it does after 300 ms.\
 
-### **next-i18next**
+- MovieList (https://github.com/kutaybuyukkorukcu/Assignment-App/blob/main/src/components/layout/main/MovieList/index.tsx)
 
-react-i18next is a powerful internationalization framework for React / React Native which is based on i18next. Check out the history of i18next and when react-i18next was introduced.
+uses movieList, inspectMovie, loading from context\
+pagination for 2 case.\
+First one is 10 data by service and 3 movie per page\
+Second one is 20 data by service and 20 movie per page\
 
-[Go To Documentation](https://react.i18next.com)
+Lists paginated movies with the usage of MovieCard component.\
 
+- MovieCard (https://github.com/kutaybuyukkorukcu/Assignment-App/blob/main/src/components/layout/main/MovieCard/index.tsx)\
 
-### **eslint**
+uses movieDetail, inspectMovie props.\
+Simple cards that gives simple informations about the movies.\
 
+- MovieDetailCard (https://github.com/kutaybuyukkorukcu/Assignment-App/blob/main/src/components/layout/main/MovieDetailCard.tsx)\
 
+uses movieDetail, loading from context\
+An independent card with detailed information about the movie\
 
-[Go To Documentation]()
+#### Context
 
+- MovieContext (https://github.com/kutaybuyukkorukcu/Assignment-App/blob/main/src/context/MovieContext/MovieContext.tsx)
 
-### **jest**
+// MovieContextType
 
+**movieDetail**: *MovieDetail*\
+**movieList**: *SimpleMovieDetail[]*\
+**totalMovieResults**: *number*\
+**loading**: *boolean // Simple loading state*\
+**searchParam**: *string*\
+**setSearchParam**: *(searchParam: string) => void*\
+**searchType**: *SearchType*\
+**setSearchType**: *(searchType: SearchType) => void*\
+**searchMovie**: *(searchParam: string, page: number, override: boolean) => MovieSearchResponse*\
+**inspectMovie**: *(movieImdbId: string) => MovieDetail*\
+**searchRandomMovies**: *() => MovieSearchResponse*\
+**extendedSearchMovie**: *(searchParam: string, page: number, override: boolean) => MovieSearchResponse*
 
-
-[Go To Documentation]()
-
-
-### **Cypress**
-
-Fast, easy and reliable testing for anything that runs in a browser.
-
-[Go To Documentation](https://docs.cypress.io/guides/overview/why-cypress.html)
-
-
-### **Docker**
-
-Docker simplifies and accelerates your workflow, while giving developers the freedom to innovate with their choice of tools, application stacks, and deployment environments for each project.
-
-[Go To Documentation](https://www.docker.com/get-started)
-
-
-### **Github Actions**
-
-GitHub Actions makes it easy to automate all your software workflows, now with world-class CI/CD. Build, test, and deploy your code right from GitHub.
-
-[Go To Documentation](https://docs.github.com/en/actions)
-
-
+- searchMovie\
+// Uses getMoviesBySearchParam service
+- inspectMovie\
+// Uses getMovieDetailByImdbId service
+- extendedSearchMovie
+// Uses getAdditionalMoviesBySearchparam service
 
 ## License
 
