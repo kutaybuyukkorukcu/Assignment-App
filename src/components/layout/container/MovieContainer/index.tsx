@@ -19,34 +19,46 @@ export const MovieContainer: React.FC = () => {
         searchType,
         setSearchType,
         extendedSearchMovie, 
-        searchRandomMovies
     } = useContext(MovieContext) as MovieContextType;
 
-    // const [searchParam, setSearchParam] = useState<string>('Marvel');
     const [paginationNumber, setPaginationNumber] = useState<{ selected }>({ selected: 0 });
-    // const [searchType, setSearchType] = useState<SearchType>(SearchType.BASIC_SEARCH);
+
+    // context'e tasinabilir.
     const [pageNumber, setPageNumber] = useState<number>(1);
     
     useEffect(() => {
         // searchRandomMovies()
-        searchMovie(searchParam, pageNumber, false);
 
-    }, [pageNumber])
+        if (searchType == SearchType.BASIC_SEARCH) {
+            searchMovie(searchParam, pageNumber, false);
+        } else if (searchType == SearchType.EXTENDED_SEARCH) {
+            extendedSearchMovie(searchParam, pageNumber, true);
+        }
+
+    }, [pageNumber, searchType])
 
     useEffect(() => {
-        const delayFunc = setTimeout(() => searchMovie(searchParam, pageNumber, true), 300);
+        const delayFunc = searchType == SearchType.BASIC_SEARCH ?
+          setTimeout(() => searchMovie(searchParam, pageNumber, true), 300) :
+          setTimeout(() => extendedSearchMovie(searchParam, pageNumber, true), 300);
+          
         // setPaginationNumber({selected : 0});
         return () => clearTimeout(delayFunc);
         }, [searchParam]
     )
 
-    const increasePageNumber = () => {
-        setPageNumber(pageNumber + 1);
+    const increasePageNumber = (paginationNumber?: number) => {
+        if (searchType == SearchType.BASIC_SEARCH) {
+            setPageNumber(pageNumber + 1);
+        } else if (searchType == SearchType.EXTENDED_SEARCH) {
+            const newPageNumber = ((paginationNumber + 1) * 2) - 1;
+            setPageNumber(newPageNumber);
+        }
     }
 
     return (
         <>
-            <SearchBar searchParam={searchParam} setSearchParam={setSearchParam} setSearchType={setSearchType} />
+            <SearchBar setPageNumber={setPageNumber} />
             <MovieList 
                 paginationNumber={paginationNumber.selected} 
                 searchType={searchType}

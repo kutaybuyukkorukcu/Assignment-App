@@ -113,7 +113,6 @@ export const MovieProdiver: React.FC<ReactNode> = ({children}) => {
                 setLoading(false);
             })
             .catch( (error: AxiosError) => {
-                console.log(error.toJSON());
                 setLoading(false);
             })
     }

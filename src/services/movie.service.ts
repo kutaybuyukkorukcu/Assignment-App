@@ -55,7 +55,7 @@ export const getAdditionalMoviesBySearchParam = (searchParam: string, page: numb
         )
         .then(
             axios.spread((firstMovieList: AxiosResponse, secondMovieList: AxiosResponse) => {
-                return [ ...firstMovieList.data, ...secondMovieList.data ]
+                return [ firstMovieList.data, secondMovieList.data ]
             })
         );
 
