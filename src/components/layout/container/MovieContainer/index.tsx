@@ -11,23 +11,18 @@ import { Link } from "react-router-dom";
 export const MovieContainer: React.FC = () => {
 
     const { 
-        movieList, 
         totalMovieResults,
         searchMovie,
         searchParam,
-        setSearchParam,
         searchType,
-        setSearchType,
         extendedSearchMovie, 
     } = useContext(MovieContext) as MovieContextType;
 
+    // context'e tasinabilirler.
     const [paginationNumber, setPaginationNumber] = useState<{ selected }>({ selected: 0 });
-
-    // context'e tasinabilir.
     const [pageNumber, setPageNumber] = useState<number>(1);
     
     useEffect(() => {
-        // searchRandomMovies()
 
         if (searchType == SearchType.BASIC_SEARCH) {
             searchMovie(searchParam, pageNumber, false);
@@ -42,7 +37,6 @@ export const MovieContainer: React.FC = () => {
           setTimeout(() => searchMovie(searchParam, pageNumber, true), 300) :
           setTimeout(() => extendedSearchMovie(searchParam, pageNumber, true), 300);
           
-        // setPaginationNumber({selected : 0});
         return () => clearTimeout(delayFunc);
         }, [searchParam]
     )

@@ -33,7 +33,7 @@ export const MovieContext = createContext<MovieContextType | any | null>(null);
 export const MovieProdiver: React.FC<ReactNode> = ({children}) => {
 
     const [searchType, setSearchType] = useState<SearchType>(SearchType.BASIC_SEARCH);
-    const [searchParam, setSearchParam] = useState<string>('Marvel');
+    const [searchParam, setSearchParam] = useState<string>('Funny');
     const [movieDetail, setMovieDetail] = useState<MovieDetail>(null);
     const [movieList, setMovieList] = useState<SimpleMovieDetail[]>([]);
     const [totalMovieResults, setTotalMovieResults] = useState<number>(0);

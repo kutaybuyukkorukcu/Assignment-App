@@ -5,12 +5,11 @@ import { SearchBar } from ".";
 import { render } from "@testing-library/react";
 import { SearchType } from "types";
 
-const [searchParam, setSearchParam] = useState<string>('Marvel');
-const [searchType, setSearchType] = useState<SearchType>(SearchType.BASIC_SEARCH);
+const [pageNumber, setPageNumber] = useState<number>(1);
 
 it("matches snapshot", () => {
 
-    const { asFragment } = render(<SearchBar searchParam={searchParam} setSearchParam={setSearchParam} setSearchType={setSearchType} /> );
+    const { asFragment } = render(<SearchBar setPageNumber={setPageNumber} /> );
 
     expect(asFragment()).toMatchSnapshot();
 })
