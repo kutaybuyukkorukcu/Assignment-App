@@ -25,19 +25,6 @@ superplate is a Next.js all-in-one project generator. Create your project with t
 ```bash
     npm run start
 ```
-### Bonus Items
-
-• Api returns 10 item in one call. Find a way to show 20 item in per page. **DONE**\
-• Use client side caching for reduce your api calls and explain it how to achieve this. **DONE** (Context api)\
-
-With the use of context api the user does not have to reselect the search type or retype the search parameter.\
-
-Although the user switches between the pages, when the user goes to the page where the movies are listed, the user will see that the previous selections will remain the same.\
-
-I could not include the pageNumber state into the context api due to time limitation. If I did, my expectation would be that the pagination would not reset after the person went to the movie detail page and came.\
-
-• Unit Tests **DONE** (Didnt have enough time for them. Tried to implement for some components and did but was out of time to corret them)\
-• Reusable components **DONE**\
 
 ### Additional Libraries
 
