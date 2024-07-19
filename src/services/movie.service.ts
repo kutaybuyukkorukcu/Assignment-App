@@ -1,7 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-// const API_KEY: string = process.env.API_KEY;
-const API_KEY: string = '8e4b41ea';
+const API_KEY: string = process.env.API_KEY;
 
 export const getMoviesBySearchParam = (searchParam: string, page: number = 1) => {
     return axios
